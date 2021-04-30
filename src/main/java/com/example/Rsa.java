@@ -16,7 +16,7 @@ public class Rsa {
         BigInteger phi = p.subtract(BigInteger.ONE).multiply(q.subtract(BigInteger.ONE));
         e = BigInteger.probablePrime(bits / 2, r);
         while (phi.gcd(e).compareTo(BigInteger.ONE) > 0 && e.compareTo(phi) < 0) {
-            e.add(BigInteger.ONE);
+            e = e.add(BigInteger.ONE);
         }
         d = e.modInverse(phi);
     }
@@ -46,11 +46,18 @@ public class Rsa {
     }
 
     public static String bytes2String(byte[] cipher) {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         for (byte b : cipher) {
-            sb.append(Byte.toString(b));
+            sb.append(b);
         }
         return sb.toString();
     }
 
+    public BigInteger times(BigInteger... ints) {
+        BigInteger mul = BigInteger.ONE;
+        for (BigInteger x : ints) {
+            mul = mul.multiply(encryptBigInteger(x));
+        }
+        return decryptBigInteger(mul);
+    }
 }

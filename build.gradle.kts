@@ -1,6 +1,5 @@
 plugins {
     java
-    id("io.quarkus")
     id("application")
 }
 
@@ -9,15 +8,12 @@ repositories {
     mavenCentral()
 }
 
-val quarkusPlatformGroupId: String by project
-val quarkusPlatformArtifactId: String by project
-val quarkusPlatformVersion: String by project
+val codecVersion : String by project
 
 dependencies {
-    implementation("commons-codec:commons-codec:1.15")
-    implementation(enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}"))
-    implementation("io.quarkus:quarkus-arc")
-    testImplementation("io.quarkus:quarkus-junit5")
+    implementation("commons-codec:commons-codec:${codecVersion}")
+    testImplementation(platform("org.junit:junit-bom:5.7.1"))
+    testImplementation("org.junit.jupiter:junit-jupiter")
 }
 
 group = "com.example"
@@ -33,6 +29,9 @@ tasks.withType<JavaCompile> {
     options.compilerArgs.add("-parameters")
 }
 
+tasks.named<Test>("test") {
+    useJUnitPlatform()
+}
 application {
     mainClass.set("com.example.App")
 }
