@@ -9,10 +9,11 @@ repositories {
 }
 
 val codecVersion : String by project
+val junitVersion : String by project
 
 dependencies {
     implementation("commons-codec:commons-codec:${codecVersion}")
-    testImplementation(platform("org.junit:junit-bom:5.7.1"))
+    testImplementation(platform("org.junit:junit-bom:${junitVersion}"))
     testImplementation("org.junit.jupiter:junit-jupiter")
 }
 
