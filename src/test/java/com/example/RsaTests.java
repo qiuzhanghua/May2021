@@ -39,10 +39,20 @@ public class RsaTests {
     @DisplayName("7! = 5880")
     @Test
     public void test_factorial_of_7() {
-        assertEquals(rsa.times(BigInteger.valueOf(7), BigInteger.valueOf(7),
+        assertEquals(rsa.times(BigInteger.valueOf(7), BigInteger.valueOf(6),
                 BigInteger.valueOf(5), BigInteger.valueOf(4),
                 BigInteger.valueOf(3), BigInteger.valueOf(2)
-        ), BigInteger.valueOf(5880));
+        ), BigInteger.valueOf(5040));
+    }
+
+    @DisplayName("9! = 5880")
+    @Test
+    public void test_factorial_of_9() {
+        assertEquals(rsa.times(BigInteger.valueOf(9), BigInteger.valueOf(8),
+                BigInteger.valueOf(7), BigInteger.valueOf(6),
+                BigInteger.valueOf(5), BigInteger.valueOf(4),
+                BigInteger.valueOf(3), BigInteger.valueOf(2)
+        ), BigInteger.valueOf(362880));
     }
 
 }
